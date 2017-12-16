@@ -8,12 +8,12 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/https
+~MSle0~/!
 
 # Command Line History (newest to oldest):
 :q
-:1
 :w
+:1
 :wq
 :47
 :41
@@ -23,6 +23,10 @@
 :split ~/.vimrc
 
 # Search String History (newest to oldest):
+?/!
+?/Wel
+?/Some c
+?/vel
 ?/https
 ?/Oh 
 ?/TRELLO_USERNAME
@@ -63,47 +67,53 @@
 		);
 	        console.log(countRequests);
 ""1	LINE	0
-	
+	LISTS
 "2	LINE	0
+	
+"3	LINE	0
 	// Simple in-memory store for now
 	var dreams = [
 	  "Find and count some sheep",
 	  "Climb a really tall mountain",
 	  "Wash the dishes"
 	];
-"3	LINE	0
-	}
 "4	LINE	0
-	;
-"5	LINE	0
 	}
+"5	LINE	0
+	;
 "6	LINE	0
-	  const url =
+	}
 "7	LINE	0
-	      <p class="bold">Oh hi,</p>
+	  const url =
 "8	LINE	0
+	      <p class="bold">Oh hi,</p>
+"9	LINE	0
 	      <form>
 	        <input type="text" maxlength="100" placeholder="Dreams!">
 	        <button type="submit">Submit</button>
 	      </form>
-"9	LINE	0
-	      <p>Tell me your hopes and dreams:</p>
 "-	CHAR	0
-	b
+	!
 
 # File marks:
-'0  1  0  ~/server.js
-'1  29  64  ~/views/index.html
-'2  1  0  ~/public/client.js
-'3  44  9  ~/server.js
-'4  8  16  ~/.env
-'5  32  37  ~/server.js
-'6  21  43  ~/server.js
-'7  29  2  ~/server.js
-'8  29  25  ~/server.js
-'9  1  0  ~/package.json
+'0  1  0  ~/.env
+'1  11  63  ~/.env
+'2  13  26  ~/views/index.html
+'3  1  0  ~/server.js
+'4  29  64  ~/views/index.html
+'5  1  0  ~/public/client.js
+'6  44  9  ~/server.js
+'7  8  16  ~/.env
+'8  32  37  ~/server.js
+'9  21  43  ~/server.js
 
 # Jumplist (newest first):
+-'  1  0  ~/.env
+-'  11  63  ~/.env
+-'  13  26  ~/views/index.html
+-'  1  0  ~/views/index.html
+-'  29  20  ~/views/index.html
+-'  24  4  ~/views/index.html
 -'  1  0  ~/server.js
 -'  31  7  ~/server.js
 -'  46  1  ~/server.js
@@ -113,15 +123,12 @@
 -'  11  16  ~/server.js
 -'  20  108  ~/server.js
 -'  24  49  ~/server.js
--'  29  64  ~/views/index.html
 -'  28  6  ~/views/index.html
--'  1  0  ~/views/index.html
 -'  1  0  ~/public/client.js
 -'  7  36  ~/public/client.js
 -'  44  9  ~/server.js
 -'  10  27  ~/server.js
 -'  8  16  ~/.env
--'  1  0  ~/.env
 -'  32  37  ~/server.js
 -'  34  16  ~/server.js
 -'  33  20  ~/server.js
@@ -183,10 +190,42 @@
 -'  23  0  ~/package.json
 -'  1  0  ~/.bashrc
 -'  1  0  ~/.bashrc
--'  8  16  ~/.env
--'  1  0  ~/.env
+-'  1  0  ~/server.js
+-'  31  7  ~/server.js
+-'  46  1  ~/server.js
+-'  41  9  ~/server.js
+-'  40  24  ~/server.js
+-'  23  91  ~/server.js
+-'  11  16  ~/server.js
+-'  20  108  ~/server.js
+-'  24  49  ~/server.js
+-'  13  26  ~/views/index.html
+-'  1  0  ~/views/index.html
+-'  29  20  ~/views/index.html
+-'  24  4  ~/views/index.html
+-'  1  0  ~/server.js
 
 # History of marks within files (newest to oldest):
+
+> ~/.env
+	"	1	0
+	^	11	64
+	.	11	54
+	+	8	16
+	+	11	54
+
+> ~/views/index.html
+	"	13	26
+	^	29	78
+	.	13	26
+	+	36	0
+	+	25	0
+	+	24	22
+	+	30	0
+	+	29	64
+	+	13	35
+	+	29	77
+	+	13	26
 
 > ~/server.js
 	"	1	0
@@ -293,16 +332,6 @@
 	+	42	78
 	+	54	0
 
-> ~/views/index.html
-	"	29	64
-	^	29	65
-	.	29	64
-	+	36	0
-	+	25	0
-	+	24	22
-	+	30	0
-	+	29	64
-
 > ~/public/client.js
 	"	1	0
 	.	1	0
@@ -310,12 +339,6 @@
 	+	2	0
 	+	7	0
 	+	1	0
-
-> ~/.env
-	"	8	16
-	^	8	31
-	.	8	16
-	+	8	16
 
 > ~/package.json
 	"	1	0

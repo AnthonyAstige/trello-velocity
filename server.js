@@ -7,8 +7,10 @@ var app = express();
 var rp = require('request-promise');
 
 // Setup file globals for easy access
-const {API_KEY, API_TOKEN, TRELLO_USERNAME} = process.env;
+const {API_KEY, API_TOKEN, TRELLO_USERNAME,IGNORE_IDLISTS} = process.env;
 const API_PREFIX="https://api.trello.com/1";
+const IGNORE_IDLISTS_ARR=IGNORE_IDLISTS.split(',');
+console.log(IGNORE_IDLISTS_ARR);
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -17,8 +19,8 @@ const API_PREFIX="https://api.trello.com/1";
 app.use(express.static('public'));
 
 const getCardCount = ({ofBoard}) =>
-  rp(`${API_PREFIX}/boards/${ofBoard}/cards/?fields=&key=${API_KEY}&token=${API_TOKEN}`)
-    .then(result => JSON.parse(result).length)
+  rp(`${API_PREFIX}/boards/${ofBoard}/cards/?fields=idList&key=${API_KEY}&token=${API_TOKEN}`)
+    .then(result => JSON.parse(result).filter(c => !IGNORE_IDLISTS_ARR.includes(c.idList)).length)
 const getOpenBoards = ({user}) =>
   rp(`${API_PREFIX}/members/${user}/boards?filter=open&fields=id,name&key=${API_KEY}&token=${API_TOKEN}`)
     .then(result => JSON.parse(result))
