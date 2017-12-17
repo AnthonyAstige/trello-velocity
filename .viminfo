@@ -8,12 +8,12 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/!
+~Msle0~/\<idList\>
 
 # Command Line History (newest to oldest):
-:q
 :w
 :1
+:q
 :wq
 :47
 :41
@@ -23,6 +23,9 @@
 :split ~/.vimrc
 
 # Search String History (newest to oldest):
+? \<idList\>
+?/c.idL
+? \<IGNORE_IDLISTS_ARR\>
 ?/!
 ?/Wel
 ?/Some c
@@ -67,84 +70,82 @@
 		);
 	        console.log(countRequests);
 ""1	LINE	0
-	LISTS
+	    )
 "2	LINE	0
-	
+	      console.log(result);
 "3	LINE	0
+	
+"4	LINE	0
 	// Simple in-memory store for now
 	var dreams = [
 	  "Find and count some sheep",
 	  "Climb a really tall mountain",
 	  "Wash the dishes"
 	];
-"4	LINE	0
-	}
 "5	LINE	0
-	;
-"6	LINE	0
 	}
+"6	LINE	0
+	;
 "7	LINE	0
-	  const url =
+	}
 "8	LINE	0
-	      <p class="bold">Oh hi,</p>
+	  const url =
 "9	LINE	0
-	      <form>
-	        <input type="text" maxlength="100" placeholder="Dreams!">
-	        <button type="submit">Submit</button>
-	      </form>
+	      <p class="bold">Oh hi,</p>
 "-	CHAR	0
-	!
+	}
 
 # File marks:
-'0  1  0  ~/.env
-'1  11  63  ~/.env
-'2  13  26  ~/views/index.html
-'3  1  0  ~/server.js
-'4  29  64  ~/views/index.html
-'5  1  0  ~/public/client.js
-'6  44  9  ~/server.js
-'7  8  16  ~/.env
-'8  32  37  ~/server.js
-'9  21  43  ~/server.js
+'0  23  0  ~/server.js
+'1  13  26  ~/views/index.html
+'2  1  0  ~/server.js
+'3  29  64  ~/views/index.html
+'4  1  0  ~/public/client.js
+'5  46  9  ~/server.js
+'6  8  16  ~/.env
+'7  34  37  ~/server.js
+'8  31  2  ~/server.js
+'9  31  25  ~/server.js
 
 # Jumplist (newest first):
--'  1  0  ~/.env
--'  11  63  ~/.env
+-'  23  0  ~/server.js
+-'  22  52  ~/server.js
+-'  13  12  ~/server.js
+-'  12  6  ~/server.js
+-'  1  0  ~/server.js
 -'  13  26  ~/views/index.html
 -'  1  0  ~/views/index.html
 -'  29  20  ~/views/index.html
 -'  24  4  ~/views/index.html
--'  1  0  ~/server.js
--'  31  7  ~/server.js
--'  46  1  ~/server.js
--'  41  9  ~/server.js
--'  40  24  ~/server.js
--'  23  91  ~/server.js
+-'  33  7  ~/server.js
+-'  48  1  ~/server.js
+-'  43  9  ~/server.js
+-'  42  24  ~/server.js
+-'  25  91  ~/server.js
 -'  11  16  ~/server.js
--'  20  108  ~/server.js
--'  24  49  ~/server.js
+-'  26  49  ~/server.js
 -'  28  6  ~/views/index.html
 -'  1  0  ~/public/client.js
 -'  7  36  ~/public/client.js
--'  44  9  ~/server.js
+-'  46  9  ~/server.js
 -'  10  27  ~/server.js
 -'  8  16  ~/.env
--'  32  37  ~/server.js
--'  34  16  ~/server.js
--'  33  20  ~/server.js
--'  38  5  ~/server.js
--'  22  0  ~/server.js
--'  51  2  ~/server.js
+-'  1  0  ~/.env
+-'  34  37  ~/server.js
+-'  36  16  ~/server.js
+-'  35  20  ~/server.js
+-'  40  5  ~/server.js
+-'  24  0  ~/server.js
+-'  53  2  ~/server.js
 -'  9  9  ~/server.js
 -'  3  0  ~/server.js
--'  21  43  ~/server.js
--'  29  2  ~/server.js
+-'  31  2  ~/server.js
 -'  1  0  ~/package.json
 -'  15  21  ~/package.json
 -'  16  29  ~/package.json
 -'  5  0  ~/server.js
--'  28  22  ~/server.js
--'  27  41  ~/server.js
+-'  30  22  ~/server.js
+-'  29  41  ~/server.js
 -'  1  0  ~/.vimrc
 -'  1  0  ~/.bashrc
 -'  23  0  ~/package.json
@@ -190,22 +191,121 @@
 -'  23  0  ~/package.json
 -'  1  0  ~/.bashrc
 -'  1  0  ~/.bashrc
--'  1  0  ~/server.js
--'  31  7  ~/server.js
--'  46  1  ~/server.js
--'  41  9  ~/server.js
--'  40  24  ~/server.js
--'  23  91  ~/server.js
--'  11  16  ~/server.js
--'  20  108  ~/server.js
--'  24  49  ~/server.js
+-'  8  16  ~/.env
+-'  1  0  ~/.env
+-'  1  0  ~/.env
+-'  11  63  ~/.env
 -'  13  26  ~/views/index.html
 -'  1  0  ~/views/index.html
 -'  29  20  ~/views/index.html
 -'  24  4  ~/views/index.html
--'  1  0  ~/server.js
 
 # History of marks within files (newest to oldest):
+
+> ~/server.js
+	"	23	0
+	^	23	98
+	.	24	0
+	+	35	119
+	+	35	45
+	+	35	119
+	+	35	40
+	+	35	119
+	+	35	152
+	+	35	133
+	+	35	147
+	+	35	126
+	+	35	119
+	+	38	5
+	+	38	5
+	+	38	5
+	+	38	5
+	+	38	5
+	+	38	5
+	+	38	0
+	+	38	0
+	+	35	119
+	+	35	30
+	+	35	51
+	+	35	30
+	+	35	119
+	+	35	22
+	+	35	27
+	+	38	0
+	+	39	0
+	+	38	4
+	+	38	25
+	+	35	19
+	+	35	20
+	+	38	3
+	+	42	27
+	+	35	40
+	+	35	125
+	+	35	125
+	+	38	0
+	+	35	0
+	+	36	112
+	+	46	10
+	+	47	4
+	+	35	19
+	+	37	4
+	+	42	74
+	+	10	41
+	+	34	37
+	+	26	48
+	+	27	0
+	+	26	38
+	+	25	12
+	+	25	12
+	+	25	123
+	+	25	0
+	+	24	32
+	+	25	2
+	+	27	0
+	+	22	0
+	+	22	2
+	+	21	34
+	+	23	19
+	+	23	46
+	+	23	20
+	+	23	46
+	+	24	0
+	+	23	45
+	+	24	0
+	+	25	5
+	+	11	16
+	+	22	6
+	+	11	19
+	+	11	18
+	+	15	0
+	+	11	43
+	+	14	0
+	+	22	18
+	+	25	18
+	+	42	25
+	+	43	75
+	+	45	9
+	+	43	67
+	+	44	78
+	+	56	0
+	+	22	52
+	+	23	21
+	+	23	46
+	+	24	5
+	+	23	39
+	+	23	26
+	+	10	43
+	+	12	50
+	+	13	31
+	+	23	14
+	+	23	14
+	+	23	14
+	+	23	20
+	+	24	4
+	+	23	20
+	+	24	0
+	+	23	97
+	+	24	0
 
 > ~/.env
 	"	1	0
@@ -226,111 +326,6 @@
 	+	13	35
 	+	29	77
 	+	13	26
-
-> ~/server.js
-	"	1	0
-	^	42	79
-	.	54	0
-	+	33	14
-	+	33	148
-	+	33	160
-	+	33	125
-	+	33	148
-	+	33	30
-	+	33	94
-	+	33	97
-	+	33	96
-	+	33	119
-	+	33	128
-	+	33	129
-	+	33	129
-	+	33	119
-	+	33	40
-	+	33	81
-	+	33	45
-	+	33	81
-	+	33	119
-	+	33	45
-	+	33	119
-	+	33	40
-	+	33	119
-	+	33	152
-	+	33	133
-	+	33	147
-	+	33	126
-	+	33	119
-	+	36	5
-	+	36	5
-	+	36	5
-	+	36	5
-	+	36	5
-	+	36	5
-	+	36	0
-	+	36	0
-	+	33	119
-	+	33	30
-	+	33	51
-	+	33	30
-	+	33	119
-	+	33	22
-	+	33	27
-	+	36	0
-	+	37	0
-	+	36	4
-	+	36	25
-	+	33	19
-	+	33	20
-	+	36	3
-	+	40	27
-	+	33	40
-	+	33	125
-	+	33	125
-	+	36	0
-	+	33	0
-	+	34	112
-	+	44	10
-	+	45	4
-	+	33	19
-	+	35	4
-	+	40	74
-	+	10	41
-	+	32	37
-	+	24	48
-	+	25	0
-	+	24	38
-	+	23	12
-	+	23	12
-	+	23	123
-	+	23	0
-	+	22	32
-	+	23	2
-	+	25	0
-	+	20	0
-	+	20	2
-	+	19	34
-	+	21	19
-	+	21	46
-	+	21	20
-	+	21	46
-	+	22	0
-	+	21	45
-	+	22	0
-	+	23	5
-	+	11	16
-	+	20	6
-	+	11	19
-	+	11	18
-	+	13	0
-	+	11	43
-	+	12	0
-	+	20	18
-	+	23	18
-	+	40	25
-	+	41	75
-	+	43	9
-	+	41	67
-	+	42	78
-	+	54	0
 
 > ~/public/client.js
 	"	1	0
