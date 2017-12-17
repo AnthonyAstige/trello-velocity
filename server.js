@@ -1,5 +1,4 @@
-// server.js
-// where your node app starts
+// server.js - where your node app starts
 
 // init project
 var express = require('express');
@@ -10,10 +9,6 @@ var rp = require('request-promise');
 const {API_KEY, API_TOKEN, TRELLO_USERNAME,IGNORE_IDLISTS} = process.env;
 const API_PREFIX="https://api.trello.com/1";
 const IGNORE_IDLISTS_ARR=IGNORE_IDLISTS.split(',');
-console.log(IGNORE_IDLISTS_ARR);
-
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
@@ -58,18 +53,15 @@ app.get("/dreams", function (request, response) {
     .then(countRequests =>
       Promise
         .all(countRequests)
-        .then((boardsWithCounts) => {
-          console.log(boardsWithCounts);
-          response.send([
-            ...boardsWithCounts.map(b => `${b.name} : ${b.counts.__TOTAL__} (${
-              Object.keys(b.counts)
-                .filter(l => '__TOTAL__' !== l)
-                .sort((l1, l2) => b.counts[l2] - b.counts[l1])
-                .map(label => `${label}:${b.counts[label]}`)
-              })`),
-           `Total: ${boardsWithCounts.reduce((acc, curr) => acc + curr.counts.__TOTAL__, 0)}`
-          ]);
-        })
+        .then((boardsWithCounts) => response.send([
+          ...boardsWithCounts.map(b => `${b.name} : ${b.counts.__TOTAL__} (${
+            Object.keys(b.counts)
+              .filter(l => '__TOTAL__' !== l)
+              .sort((l1, l2) => b.counts[l2] - b.counts[l1])
+              .map(label => `${label}:${b.counts[label]}`)
+            })`),
+         `Total: ${boardsWithCounts.reduce((acc, curr) => acc + curr.counts.__TOTAL__, 0)}`
+        ]))
     )
   // Much simple & beautiful here, but not as useful
   /*
@@ -88,12 +80,6 @@ app.get("/dreams", function (request, response) {
         })
     )
   */
-});
-
-// could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
-app.post("/dreams", function (request, response) {
-  dreams.push(request.query.dream);
-  response.sendStatus(200);
 });
 
 // listen for requests :)
