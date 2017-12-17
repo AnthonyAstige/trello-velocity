@@ -18,9 +18,28 @@ console.log(IGNORE_IDLISTS_ARR);
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
+const getCardCountsByLabel = ({ofBoard}) =>
+  rp(`${API_PREFIX}/boards/${ofBoard}/cards/?fields=idList,labels&key=${API_KEY}&token=${API_TOKEN}`)
+    .then(result => JSON
+      .parse(result)
+      .filter(c => !IGNORE_IDLISTS_ARR.includes(c.idList))
+      .reduce(
+        (totals, card) => {
+          const newTotals = JSON.parse(JSON.stringify(totals));
+          card.labels.forEach(label => {
+            newTotals[label.name] = totals[label.name] ? totals[label.name] + 1 : 1;
+          })
+          newTotals.__TOTAL__ += 1;
+          return newTotals;
+        },
+        { __TOTAL__: 0 }
+      )
+    );
 const getCardCount = ({ofBoard}) =>
   rp(`${API_PREFIX}/boards/${ofBoard}/cards/?fields=idList&key=${API_KEY}&token=${API_TOKEN}`)
-    .then(result => JSON.parse(result).filter(c => !IGNORE_IDLISTS_ARR.includes(c.idList)).length)
+    .then(result => {
+      return JSON.parse(result).filter(c => !IGNORE_IDLISTS_ARR.includes(c.idList)).length
+    })
 const getOpenBoards = ({user}) =>
   rp(`${API_PREFIX}/members/${user}/boards?filter=open&fields=id,name&key=${API_KEY}&token=${API_TOKEN}`)
     .then(result => JSON.parse(result))
@@ -31,6 +50,29 @@ app.get("/", function (request, response) {
 });
 
 app.get("/dreams", function (request, response) {
+  getOpenBoards({user: TRELLO_USERNAME})
+    .then(boards =>
+      boards.map(
+        board => getCardCountsByLabel({ ofBoard: board.id }).then(counts => ({name: board.name, counts})))
+    )
+    .then(countRequests =>
+      Promise
+        .all(countRequests)
+        .then((boardsWithCounts) => {
+          console.log(boardsWithCounts);
+          response.send([
+            ...boardsWithCounts.map(b => `${b.name} : ${b.counts.__TOTAL__} (${
+              Object.keys(b.counts)
+                .filter(l => '__TOTAL__' !== l)
+                .sort((l1, l2) => b.counts[l2] - b.counts[l1])
+                .map(label => `${label}:${b.counts[label]}`)
+              })`),
+           `Total: ${boardsWithCounts.reduce((acc, curr) => acc + curr.counts.__TOTAL__, 0)}`
+          ]);
+        })
+    )
+  // Much simple & beautiful here, but not as useful
+  /*
   getOpenBoards({user: TRELLO_USERNAME})
     .then(boards => 
       boards.map(board => getCardCount({ ofBoard: board.id }).then(count => ({name: board.name, count: count})))
@@ -45,6 +87,7 @@ app.get("/dreams", function (request, response) {
           ]);
         })
     )
+  */
 });
 
 // could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
