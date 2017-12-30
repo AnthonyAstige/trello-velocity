@@ -60,7 +60,7 @@ app.get("/dreams", function (request, response) {
               .sort((l1, l2) => b.counts[l2] - b.counts[l1])
               .map(label => `${label}:${b.counts[label]}`)
             })`),
-         `Total: ${boardsWithCounts.reduce((acc, curr) => acc + curr.counts.__TOTAL__, 0)}`
+         `Total : ${boardsWithCounts.reduce((acc, curr) => acc + curr.counts.__TOTAL__, 0)}`
         ]))
     )
   // Much simple & beautiful here, but not as useful

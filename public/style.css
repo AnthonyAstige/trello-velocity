@@ -80,3 +80,20 @@ footer > a {
 .nicejob {
   text-decoration: line-through;
 }
+
+.dream {
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+.dream .title {
+	cursor: pointer;
+}
+
+.dream .stats {
+	display: none;
+}
+
+.dream .stats.show {
+	display: inline;
+}
