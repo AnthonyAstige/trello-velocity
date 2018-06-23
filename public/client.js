@@ -5,6 +5,6 @@ $(function() {
 			$(`<div class='dream'><span class="title">${title}</span> : <span class="stats">${stats}</span></div>`).appendTo('#dreams');
 		});
 		$('.title').click((e) => console.log($(e.target).closest('.dream').find('.stats').addClass('show')));
-    $('.ignoring').show();
+    $('.info').show();
 	});
 });

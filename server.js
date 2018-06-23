@@ -51,21 +51,26 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-const GLOBAL_SIDE_EFFECT_addIgnoreListIdsByName = (boardId) => 
-  rp(`${API_PREFIX}/boards/${boardId}/lists/?fields=name&key=${API_KEY}&token=${API_TOKEN}`)
-    .then(result => {
-      const res = JSON.parse(result);
-      res.filter(c => IGNORE_NAMEDLISTS_ARR.includes(c.name)).forEach(list=>IGNORE_IDLISTS_ARR.push(list.id));
-      console.warn(res.length)
-    });
+
+const GLOBAL_SIDE_EFFECT_addIgnoreListIdsByName_ALL = boards => {
+
+}
+
+const GLOBAL_SIDE_EFFECT_addIgnoreListIdsByName = (board) => {
+  return new Promise((resolve, reject) => {
+    rp(`${API_PREFIX}/boards/${board.id}/lists/?fields=name&key=${API_KEY}&token=${API_TOKEN}`)
+      .then(result => {
+        const res = JSON.parse(result);
+        res.filter(c => IGNORE_NAMEDLISTS_ARR.includes(c.name)).forEach(list=>IGNORE_IDLISTS_ARR.push(list.id));
+        resolve(board);
+      });
+  });
+}
 
 app.get("/dreams", function (request, response) {
   getOpenBoards({user: TRELLO_USERNAME})
     .then(boards =>
-      boards.map(board => {
-        GLOBAL_SIDE_EFFECT_addIgnoreListIdsByName(board.id);
-        return board;
-      })
+      Promise.all(boards.map(board => GLOBAL_SIDE_EFFECT_addIgnoreListIdsByName(board)))
     )
     .then(boards =>
        boards.map(board => getCardCountsByLabel({ ofBoard: board.id }).then(counts => ({name: board.name, counts})))
