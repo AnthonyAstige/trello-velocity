@@ -6,9 +6,11 @@ var app = express();
 var rp = require('request-promise');
 
 // Setup file globals for easy access
-const {API_KEY, API_TOKEN, TRELLO_USERNAME,IGNORE_IDLISTS} = process.env;
+const {API_KEY, API_TOKEN, TRELLO_USERNAME,IGNORE_IDLISTS,IGNORE_NAMEDLISTS} = process.env;
 const API_PREFIX="https://api.trello.com/1";
 const IGNORE_IDLISTS_ARR=IGNORE_IDLISTS.split(',');
+const IGNORE_NAMEDLISTS_ARR=IGNORE_NAMEDLISTS.split(',');
+console.warn(IGNORE_NAMEDLISTS_ARR);
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
@@ -44,11 +46,21 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
+const GLOBAL_SIDE_EFFECT_addIgnoreListIdsByName = (boardId) => 
+  rp(`${API_PREFIX}/boards/${boardId}/lists/?fields=name,idBoard&key=${API_KEY}&token=${API_TOKEN}`)
+    .then(result => {
+      JSON.parse(result).filter(c => IGNORE_NAMEDLISTS_ARR.includes(c.name)).forEach(board=>IGNORE_IDLISTS_ARR.push(board.id));
+    });
+
 app.get("/dreams", function (request, response) {
   getOpenBoards({user: TRELLO_USERNAME})
     .then(boards =>
-      boards.map(
-        board => getCardCountsByLabel({ ofBoard: board.id }).then(counts => ({name: board.name, counts})))
+       boards.map(
+        board => {
+          GLOBAL_SIDE_EFFECT_addIgnoreListIdsByName(board.id)
+          return getCardCountsByLabel({ ofBoard: board.id }).then(counts => ({name: board.name, counts}))
+        }
+      )
     )
     .then(countRequests =>
       Promise

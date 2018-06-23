@@ -97,3 +97,7 @@ footer > a {
 .dream .stats.show {
 	display: inline;
 }
+
+.ignoring {
+  font-size: 13px;
+}
